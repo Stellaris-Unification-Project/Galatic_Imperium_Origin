@@ -1,0 +1,6 @@
+on_game_start = {
+	events = {
+	galactic_starts.1
+	galactic_starts.2
+	}
+}

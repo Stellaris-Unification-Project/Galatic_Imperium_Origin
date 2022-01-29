@@ -1,0 +1,328 @@
+namespace = galactic_starts
+
+event = {
+	id = galactic_starts.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+			
+		if = {
+		limit = {
+			any_country = {
+			has_origin = origin_galactic_hegemon
+			}
+		}
+		every_playable_country = {
+			limit = {
+				OR = {
+				has_origin = origin_common_ground
+				has_origin = origin_hegemon
+				}
+			}
+			country_event = { id = galactic_expand.2 }
+		}
+		every_playable_country = {
+			every_playable_country = {
+				establish_communications_no_message = prev
+			}
+		} 
+		create_country = {
+			name = "Tech Dummy 2"
+			type = io_tech_dummy_2
+			flag = {
+				icon = {
+					category = "special"
+					file = "the_shroud.dds"
+				}
+				background= {
+					category = "backgrounds"
+					file = "00_solid.dds"
+				}
+				colors={
+					"black"
+					"black"
+					"null"
+					"null"
+				}
+			}
+			effect = {
+				save_global_event_target_as = io_tech_dummy_country
+			}
+		}
+		set_global_flag = galactic_community_founded
+		pass_resolution_no_cooldown = resolution_council_denouncement
+		random_playable_country = {
+			limit = {
+				has_origin = origin_galactic_hegemon
+		}
+		country_event = { id = galactic_origin.1 }	
+		}
+		every_playable_country = {
+				limit = {
+					NOT = {
+					OR = {
+					has_origin = origin_common_ground
+					has_origin = origin_common_ground_npc
+					has_origin = origin_hegemon
+					has_origin = origin_hegemon_npc
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+					}
+					}
+				}
+				add_to_galactic_community_no_message = yes
+		}
+		every_playable_country = {
+		copy_techs_from = {
+			target = event_target:io_tech_dummy_country
+		}
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_clone_army
+				}
+			country_event = { id = clones.22 }
+		}
+		#划分领土
+		every_playable_country = {
+			if = {
+				limit = { 
+					OR = {
+					has_origin = origin_galactic_hegemon 
+					has_origin = origin_galactic_custodian
+					}
+				}
+				set_variable = {
+					which = expand
+					value = 9
+				}
+				country_event = { id = galactic_expand.1 }
+			}
+			else_if = {
+				limit =  { has_origin = origin_hegemon }
+				set_variable = {
+					which = expand
+					value = 6
+				}
+				set_country_flag = galcom_form_nay
+				country_event = { id = galactic_expand.1 }
+			}
+			else_if = {
+				limit =  { has_origin = origin_common_ground }
+				set_variable = {
+					which = expand
+					value = 6
+				}
+				set_country_flag = galcom_form_nay
+				country_event = { id = galactic_expand.1 }
+			}
+			else_if = {
+				limit =  { OR = {
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+				} }
+				set_variable = {
+					which = expand
+					value = 6
+				}
+				set_country_flag = galcom_form_nay
+				country_event = { id = galactic_expand.1 }
+			}
+			else_if = {
+				limit =  { has_origin = origin_hegemon_npc }
+				set_variable = {
+					which = expand
+					value = 6
+				}
+				set_country_flag = galcom_form_nay
+				country_event = { id = galactic_expand.1 }
+			}
+			else_if = {
+				limit =  { has_origin = origin_common_ground_npc }
+				set_variable = {
+					which = expand
+					value = 6
+				}
+				set_country_flag = galcom_form_nay
+				country_event = { id = galactic_expand.1 }
+			}
+			else = {
+				set_variable = {
+					which = expand
+					value = 4
+				}
+				country_event = { id = galactic_expand.1 }
+			}
+			random_playable_country = {
+				limit = { is_ai = no NOT = { has_country_flag = tech_setting } }
+				set_variable = {
+					which = start_tech
+					value = 1
+				}
+				set_variable = {
+					which = start_a
+					value = 1
+				}
+				set_variable = {
+					which = start_b
+					value = 2
+				}
+				set_variable = {
+					which = start_c
+					value = 1
+				}
+				set_variable = {
+					which = start_f
+					value = 1
+				}
+				country_event = { id = galactic_origin.100 }
+				set_country_flag = tech_setting
+			}
+		}
+		}
+	}
+}
+
+event = {
+	id = galactic_starts.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+			
+		if = {
+		limit = {
+			any_country = {
+			has_origin = origin_galactic_custodian
+			}
+			NOT = { any_country = {
+				has_origin = origin_galactic_hegemon
+			} }
+		}
+		every_playable_country = {
+			limit = {
+				OR = {
+				has_origin = origin_common_ground
+				has_origin = origin_hegemon
+				}
+			}
+			country_event = { id = galactic_expand.2 }
+		}
+		every_playable_country = {
+			every_playable_country = {
+				establish_communications_no_message = prev
+			}
+		} 
+		create_country = {
+			name = "Tech Dummy 2"
+			type = io_tech_dummy_2
+			flag = {
+				icon = {
+					category = "special"
+					file = "the_shroud.dds"
+				}
+				background= {
+					category = "backgrounds"
+					file = "00_solid.dds"
+				}
+				colors={
+					"black"
+					"black"
+					"null"
+					"null"
+				}
+			}
+			effect = {
+				save_global_event_target_as = io_tech_dummy_country
+			}
+		}
+		set_global_flag = galactic_community_founded
+		pass_resolution_no_cooldown = resolution_council_denouncement
+		random_playable_country = {
+			limit = {
+				has_origin = origin_galactic_custodian
+		}
+		country_event = { id = galactic_origin.1000 }	
+		}
+		every_playable_country = {
+				limit = {
+					NOT = {
+					OR = {
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+					}
+					}
+				}
+				add_to_galactic_community_no_message = yes
+		}
+		every_playable_country = {
+		copy_techs_from = {
+			target = event_target:io_tech_dummy_country
+		}
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_clone_army
+				}
+			country_event = { id = clones.22 }
+		}
+		#划分领土
+		every_playable_country = {
+			if = {
+			limit = { 
+				OR = {
+				has_origin = origin_galactic_hegemon 
+				has_origin = origin_galactic_custodian
+				}
+			}
+				set_variable = {
+					which = expand
+					value = 9
+				}
+				country_event = { id = galactic_expand.1 }
+			}
+			else_if = {
+				limit =  { OR = {
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+				} }
+				set_variable = {
+					which = expand
+					value = 4
+				}
+				set_country_flag = galcom_form_nay
+				country_event = { id = galactic_expand.1 }
+			}
+			else = {
+				set_variable = {
+					which = expand
+					value = 4
+				}
+				country_event = { id = galactic_expand.1 }
+			}
+			random_playable_country = {
+				limit = { is_ai = no NOT = { has_country_flag = tech_setting } }
+				country_event = { id = galactic_origin.200 }
+				set_country_flag = tech_setting
+				set_variable = {
+					which = start_tech
+					value = 1
+				}
+				set_variable = {
+					which = start_a
+					value = 1
+				}
+				set_variable = {
+					which = start_b
+					value = 2
+				}
+			}
+		}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+﻿l_english:
+ ####################################
+ # Hathaway682
+ ####################################
+ opinion_imperial_rival:0 "Imperium's Rival"
+ opinion_galactic_tyrant:0 "Galactic Tyrant"
+ opinion_illegal_organization:0 "Illegal organizations outside the empire"
+ casus_belli_cb_io_liberation:0 "Liberate Empire member"
+ casus_belli_cb_io_dio:0 "Dissolve illegal organization"
+ war_goal_wg_liberation_from_the_empire:0 "Liberation from the Galactic Imperium"
+ war_goal_wg_liberation_from_the_empire_desc:0 "The goal of the war was to liberate them from the Galactic Imperium and merge them into our federation."
+ war_goal_wg_destroy_illegal_organizations:0 "Destory illegal organization"
+ war_goal_wg_destroy_illegal_organizations_desc:0 "The goal of the war was to destroy their federation and force them to merge into the Galactic Imperium."

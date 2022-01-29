@@ -1,0 +1,61 @@
+origin_galactic_hegemon = {
+	is_origin = yes
+	icon = "gfx/interface/icons/origins/unused/origins_messiah_cult.dds"
+	picture = GFX_origin_galactic_hegemon
+	max_once_global = yes
+
+	playable = {
+		host_has_dlc = "Nemesis"
+	}
+
+	starting_colony = pc_city
+
+	possible = {
+        civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_hive_devouring_swarm
+				value = civic_machine_terminator
+			}
+		}
+	}
+
+	description = "origin_tooltip_galactic_hegemon_effects"
+
+	traits = {
+	}
+
+	random_weight = {
+		base = 0
+	}
+}
+
+origin_galactic_custodian = {
+	is_origin = yes
+	icon = "gfx/interface/icons/origins/unused/origins_eldest_sibling.dds"
+	picture = GFX_origin_galactic_custodian
+	max_once_global = yes
+
+	playable = {
+		host_has_dlc = "Nemesis"
+	}
+
+	possible = {
+        civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_hive_devouring_swarm
+				value = civic_machine_terminator
+			}
+		}
+	}
+
+	description = "origin_tooltip_galactic_custodian_effects"
+
+	traits = {
+	}
+
+	random_weight = {
+		base = 0
+	}
+}

@@ -1,0 +1,1860 @@
+namespace = galactic_origin
+
+country_event = {
+	id = galactic_origin.1
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		save_event_target_as = gal_emperor
+		clear_resources = yes
+		set_galactic_emperor = yes
+		set_country_flag = original_emperor
+		random_country = {
+			limit = { is_country_type = global_event }
+			change_variable = {
+				which = galactic_empires
+				value = 1
+			}
+		}
+		store_galactic_community_leader_backup_data = {
+			room = yes
+			flag = yes
+			name = yes
+			ethics = yes
+			government = yes
+		}
+		room_name_override = ""
+		if = {
+			limit = {
+				is_socialism = yes
+			    has_civic = civic_shared_burden
+			}
+			force_add_civic = civic_galactic_sovereign_people
+		}
+		else_if = {
+			limit = { is_megacorp = yes }
+			force_add_civic = civic_galactic_sovereign_megacorp
+			change_government = {
+				authority = auth_imperial
+				cooldown = no
+				remove_invalid_civics = yes
+			}
+		}
+		else = {
+			force_add_civic = civic_galactic_sovereign
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_galactic_hegemon
+				NOT = { is_same_value = root }
+			}
+			country_event = { id = galactic_origin.2 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_common_ground
+			}
+			country_event = { id = galactic_origin.2 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_hegemon
+			}
+			country_event = { id = galactic_origin.3 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_scion
+			}
+			overlord = {
+				save_event_target_as = scion_master
+			}
+			country_event = { id = galactic_origin.4 }	
+		}
+		every_playable_country = {
+			limit = {
+				NOT = {
+				OR = {
+				has_origin = origin_common_ground
+				has_origin = origin_common_ground_npc
+				has_origin = origin_hegemon
+				has_origin = origin_hegemon_npc
+				has_origin = origin_scion
+				has_civic = civic_fanatic_purifiers
+				has_civic = civic_hive_devouring_swarm
+				has_civic = civic_machine_terminator
+				has_origin = origin_galactic_hegemon
+				}
+				}
+			}
+			country_event = { id = galactic_origin.5 }	
+		}
+		every_playable_country = {
+			limit = {
+				has_civic = civic_fanatic_purifiers
+			}
+			country_event = { id = galactic_origin.6 }	
+		}
+		every_playable_country = {
+			limit = {
+				has_civic = civic_machine_terminator
+			}
+			country_event = { id = galactic_origin.7 }
+		}
+		every_playable_country = {
+			limit = {
+				has_civic = civic_hive_devouring_swarm
+			}
+			country_event = { id = galactic_origin.8 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_common_ground_npc
+			}
+			country_event = { id = galactic_origin.9 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_hegemon_npc
+			}
+			country_event = { id = galactic_origin.10 }
+		}
+		set_government_cooldown = no
+		pass_resolution_no_cooldown = resolution_emperor_restore_council
+		pass_resolution_no_cooldown = resolution_emperor_by_election
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 50000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+	}
+
+}
+
+country_event = {
+	id = galactic_origin.1000
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		clear_resources = yes
+		set_galactic_custodian = yes
+		country_event = { id = custodian.10 days = 5400 }
+		add_modifier = { modifier = gal_custodian }
+		save_event_target_as = custodian
+		set_country_flag = original_custodian
+		store_galactic_community_leader_backup_data = {
+			room = yes
+		}
+		room_name_override = ""
+		every_playable_country = {
+			limit = {
+				has_origin = origin_galactic_hegemon
+				NOT = { is_same_value = root }
+			}
+			country_event = { id = galactic_origin.2 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_common_ground
+			}
+			country_event = { id = galactic_origin.2 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_hegemon
+			}
+			country_event = { id = galactic_origin.3 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_scion
+			}
+			overlord = {
+				save_event_target_as = scion_master
+			}
+			country_event = { id = galactic_origin.4 }	
+		}
+		every_playable_country = {
+			limit = {
+				NOT = {
+				OR = {
+				has_origin = origin_common_ground
+				has_origin = origin_common_ground_npc
+				has_origin = origin_hegemon
+				has_origin = origin_hegemon_npc
+				has_origin = origin_scion
+				has_civic = civic_fanatic_purifiers
+				has_civic = civic_hive_devouring_swarm
+				has_civic = civic_machine_terminator
+				has_origin = origin_galactic_hegemon
+				}
+				}
+			}
+			country_event = { id = galactic_origin.5 }	
+		}
+		every_playable_country = {
+			limit = {
+				has_civic = civic_fanatic_purifiers
+			}
+			country_event = { id = galactic_origin.6 }	
+		}
+		every_playable_country = {
+			limit = {
+				has_civic = civic_machine_terminator
+			}
+			country_event = { id = galactic_origin.7 }
+		}
+		every_playable_country = {
+			limit = {
+				has_civic = civic_hive_devouring_swarm
+			}
+			country_event = { id = galactic_origin.8 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_common_ground_npc
+			}
+			country_event = { id = galactic_origin.9 }
+		}
+		every_playable_country = {
+			limit = {
+				has_origin = origin_hegemon_npc
+			}
+			country_event = { id = galactic_origin.10 }
+		}
+		set_government_cooldown = no
+		pass_resolution_no_cooldown = resolution_galacticreforms_form_council
+		add_to_galactic_council = yes
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 50000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+	}
+
+}
+
+country_event = {
+	id = galactic_origin.2
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 50000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		name = galactic_origin.2.a
+		custom_tooltip = galactic_origin.2.a.tooltip
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+	}
+}
+
+
+country_event = {
+	id = galactic_origin.3
+	hide_window = yes
+
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 10000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		name = galactic_origin.3.a
+		custom_tooltip = galactic_origin.3.a.tooltip
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+	}
+}
+
+country_event = {
+	id = galactic_origin.4
+	hide_window = yes
+
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.4.a
+		custom_tooltip = galactic_origin.4.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.5
+	title = "galactic_origin.5.name"
+	hide_window = yes
+
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.5.a
+		custom_tooltip = galactic_origin.5.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.6
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.6.a
+		custom_tooltip = galactic_origin.6.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.7
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.7.a
+		custom_tooltip = galactic_origin.7.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.8
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.8.a
+		custom_tooltip = galactic_origin.8.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.9
+	hide_window = yes
+
+	is_triggered_only = yes
+
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.2.a
+		custom_tooltip = galactic_origin.2.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.10
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_resource = { energy = 50000	}
+		add_resource = { minerals = 50000 }
+		add_resource = { alloys = 5000	}
+		add_resource = { influence = 1000 }
+		if = {
+			limit = { country_uses_food = yes }
+			add_resource = { food = 10000 }
+		}
+		else = {
+			add_resource = { energy = 50000 }
+		}
+		if = {
+			limit = { is_gestalt = no }
+			add_resource = { consumer_goods = 5000 }
+		}
+		else = {
+			add_resource = { minerals = 5000 }
+		}
+		add_resource = { exotic_gases = 1000 }
+		add_resource = { rare_crystals = 1000 }
+		add_resource = { volatile_motes = 1000 }
+		add_modifier = {
+			modifier = build_start_modifier
+			days = 3600
+		}
+		name = galactic_origin.3.a
+		custom_tooltip = galactic_origin.3.a.tooltip
+		
+	}
+}
+
+country_event = {
+	id = galactic_origin.100
+
+	title = galactic_origin.100.name
+
+	picture = GFX_evt_galactic_empire
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = galactic_origin.100.t2
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_tech
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.t3
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_tech
+			value = 2
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.t4
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 2
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_tech
+			value = 3
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.t5
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 3
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_tech
+			value = 4
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.all
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 4
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_tech
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.a1
+		trigger = {
+			check_variable = {
+				which = start_a
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_a
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.a2
+		trigger = {
+			check_variable = {
+				which = start_a
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_a
+			value = 2
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.a3
+		trigger = {
+			check_variable = {
+				which = start_a
+				value = 2
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_a
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.b1
+		trigger = {
+			check_variable = {
+				which = start_b
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_b
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.b2
+		trigger = {
+			check_variable = {
+				which = start_b
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_b
+			value = 2
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.b3
+		trigger = {
+			check_variable = {
+				which = start_b
+				value = 2
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_b
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.c1
+		trigger = {
+			check_variable = {
+				which = start_c
+				value = 0
+			}
+		}
+		country_event = {
+			id = galactic_origin.100
+		}
+		hidden_effect = {
+		set_variable = {
+			which = start_c
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.c2
+		trigger = {
+			check_variable = {
+				which = start_c
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_c
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.d1
+		trigger = {
+			check_variable = {
+				which = start_d
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_d
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.d2
+		trigger = {
+			check_variable = {
+				which = start_d
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_d
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.e1
+		trigger = {
+			check_variable = {
+				which = start_e
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_e
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.e2
+		trigger = {
+			check_variable = {
+				which = start_e
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_e
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.f1
+		trigger = {
+			check_variable = {
+				which = start_f
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_f
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.f2
+		trigger = {
+			check_variable = {
+				which = start_f
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.100
+		}
+		set_variable = {
+			which = start_f
+			value = 0
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.z
+		country_event = {
+			id = galactic_origin.101
+		}
+	}
+}
+
+
+country_event = {
+	id = galactic_origin.101
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 0
+			} }
+			every_playable_country = {
+				country_event = {
+					id = galactic_expand.5
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 1
+			} }
+			create_country = {
+				name = "Tech Dummy 3"
+				type = io_tech_dummy_3
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 2
+			} }
+			create_country = {
+				name = "Tech Dummy 4"
+				type = io_tech_dummy_4
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 3
+			} }
+			create_country = {
+				name = "Tech Dummy 5"
+				type = io_tech_dummy_5
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 4
+			} }
+			create_country = {
+				name = "Tech Dummy ALL"
+				type = io_tech_dummy_all
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_a
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_emperor_imperial_armada
+			random_playable_country = {
+				limit = { is_galactic_emperor = yes }
+				if = { limit = { max_naval_capacity > 400 }
+				create_fleet_from_naval_cap = { fraction = 0.8 ship_owner_type = galactic_community } }
+				else = {
+				create_fleet_from_naval_cap = { fraction = 1 ship_owner_type = galactic_community } }	
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_a
+				value = 2
+			} }
+			pass_resolution_no_cooldown = resolution_emperor_imperial_armada
+			pass_resolution_no_cooldown = resolution_emperor_expand_ia
+			random_playable_country = {
+				limit = { is_galactic_emperor = yes }
+				if = { limit = { max_naval_capacity > 400 }
+				create_fleet_from_naval_cap = { fraction = 0.8 ship_owner_type = galactic_community }
+				create_fleet_from_naval_cap = { fraction = 0.8 ship_owner_type = galactic_community } }
+				else = {
+				create_fleet_from_naval_cap = { fraction = 1 ship_owner_type = galactic_community }
+				create_fleet_from_naval_cap = { fraction = 1 ship_owner_type = galactic_community } }	
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_b
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_galactic_market_form
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_b
+				value = 2
+			} }
+			set_global_flag = ongoing_market_nomination
+			random_country = {
+				limit = { is_galactic_emperor = yes }
+				set_country_flag = market_nomination_eligible
+				begin_event_chain = {
+					event_chain = market_founding_chain
+					target = this
+				}
+				set_variable = {
+					which = market_rating
+					value = 5
+				}
+				capital_scope = {
+					add_modifier = {
+						modifier = market_nominee_level_5
+						days = -1
+					}
+				}
+				country_event = {
+					id = action.98
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_c
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_emperor_imperial_legions
+			random_playable_country = {
+				limit = { is_galactic_emperor = yes }
+				capital_scope = {
+					while = {
+						count = 12
+						create_army = {
+							name = random
+							owner = prev
+							type = imperial_legion
+						}
+					}	
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_d
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_emperor_ina
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_e
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_emperor_gto
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_f
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_emperor_isd
+		}
+	}
+
+}
+
+country_event = {
+	id = galactic_origin.200
+
+	title = galactic_origin.200.name
+
+	picture = GFX_evt_galactic_empire
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = galactic_origin.100.t2
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_tech
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.t3
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_tech
+			value = 2
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.t4
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 2
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_tech
+			value = 3
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.t5
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 3
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_tech
+			value = 4
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.all
+		trigger = {
+			check_variable = {
+				which = start_tech
+				value = 4
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_tech
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.200.a1
+		trigger = {
+			check_variable = {
+				which = start_a
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_a
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.200.a2
+		trigger = {
+			check_variable = {
+				which = start_a
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_a
+			value = 2
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.200.a3
+		trigger = {
+			check_variable = {
+				which = start_a
+				value = 2
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_a
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.b1
+		trigger = {
+			check_variable = {
+				which = start_b
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_b
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.100.b2
+		trigger = {
+			check_variable = {
+				which = start_b
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_b
+			value = 2
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.200.b3
+		trigger = {
+			check_variable = {
+				which = start_b
+				value = 2
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_b
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.200.c1
+		trigger = {
+			check_variable = {
+				which = start_c
+				value = 0
+			}
+		}
+		country_event = {
+			id = galactic_origin.200
+		}
+		hidden_effect = {
+		set_variable = {
+			which = start_c
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.200.c2
+		trigger = {
+			check_variable = {
+				which = start_c
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_c
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.200.d1
+		trigger = {
+			check_variable = {
+				which = start_d
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_d
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.200.d2
+		trigger = {
+			check_variable = {
+				which = start_d
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_d
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.200.e1
+		trigger = {
+			check_variable = {
+				which = start_e
+				value = 0
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_e
+			value = 1
+		}
+	}
+	}
+	option = {
+		name = galactic_origin.200.e2
+		trigger = {
+			check_variable = {
+				which = start_e
+				value = 1
+			}
+		}
+		hidden_effect = {
+		country_event = {
+			id = galactic_origin.200
+		}
+		set_variable = {
+			which = start_e
+			value = 0
+		}
+	}
+	}
+
+	option = {
+		name = galactic_origin.100.z
+		country_event = {
+			id = galactic_origin.201
+		}
+	}
+}
+
+country_event = {
+	id = galactic_origin.201
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 0
+			} }
+			every_playable_country = {
+				country_event = {
+					id = galactic_expand.5
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 1
+			} }
+			create_country = {
+				name = "Tech Dummy 3"
+				type = io_tech_dummy_3
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 2
+			} }
+			create_country = {
+				name = "Tech Dummy 4"
+				type = io_tech_dummy_4
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 3
+			} }
+			create_country = {
+				name = "Tech Dummy 5"
+				type = io_tech_dummy_5
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_tech
+				value = 4
+			} }
+			create_country = {
+				name = "Tech Dummy ALL"
+				type = io_tech_dummy_all
+				flag = {
+					icon = {
+						category = "special"
+						file = "the_shroud.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = io_tech_dummy_country
+				}
+			}
+			every_playable_country = {
+				copy_techs_from = {
+					target = event_target:io_tech_dummy_country
+			}
+			country_event = {
+				id = galactic_expand.5
+			}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_a
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_custodian_gdf
+			random_playable_country = {
+				limit = { is_galactic_custodian = yes }
+				if = { limit = { max_naval_capacity > 400 }
+				create_fleet_from_naval_cap = { fraction = 0.8 ship_owner_type = galactic_community } }
+				else = {
+				create_fleet_from_naval_cap = { fraction = 1 ship_owner_type = galactic_community } }	
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_a
+				value = 2
+			} }
+			pass_resolution_no_cooldown = resolution_custodian_gdf
+			pass_resolution_no_cooldown = resolution_custodian_gdf_2
+			random_playable_country = {
+				limit = { is_galactic_custodian = yes }
+				if = { limit = { max_naval_capacity > 400 }
+				create_fleet_from_naval_cap = { fraction = 0.8 ship_owner_type = galactic_community }
+				create_fleet_from_naval_cap = { fraction = 0.8 ship_owner_type = galactic_community } }
+				else = {
+				create_fleet_from_naval_cap = { fraction = 1 ship_owner_type = galactic_community }
+				create_fleet_from_naval_cap = { fraction = 1 ship_owner_type = galactic_community } }	
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_b
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_galactic_market_form
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_b
+				value = 2
+			} }
+			set_global_flag = ongoing_market_nomination
+			random_country = {
+				limit = { is_galactic_custodian = yes }
+				set_country_flag = market_nomination_eligible
+				begin_event_chain = {
+					event_chain = market_founding_chain
+					target = this
+				}
+				set_variable = {
+					which = market_rating
+					value = 5
+				}
+				capital_scope = {
+					add_modifier = {
+						modifier = market_nominee_level_5
+						days = -1
+					}
+				}
+				country_event = {
+					id = action.98
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_c
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_custodian_ina
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_d
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_custodian_gto
+		}
+		if = {
+			limit = { check_variable = {
+				which = start_e
+				value = 1
+			} }
+			pass_resolution_no_cooldown = resolution_custodian_galpol
+		}
+	}
+
+}

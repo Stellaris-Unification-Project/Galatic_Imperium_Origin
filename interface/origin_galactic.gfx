@@ -1,0 +1,13 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_origin_galactic_custodian"
+		texturefile = "gfx/event_pictures/origins/origin_galactic_custodian.dds"
+		alwaystransparent = yes
+	}
+	spriteType = {
+		name = "GFX_origin_galactic_hegemon"
+		texturefile = "gfx/event_pictures/origins/origin_galactic_hegemon.dds"
+		alwaystransparent = yes
+	}
+}

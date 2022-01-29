@@ -1,0 +1,971 @@
+namespace = galactic_expand
+
+country_event = {
+	id = galactic_expand.1
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+	#存储物种
+	io_save_nation_pop = yes
+	#首都升级
+	if= { limit = {
+		has_origin = origin_galactic_hegemon
+	} 
+	capital_scope = {
+		set_planet_size = 30
+		io_update_home_planet_full = yes
+		clear_blockers = yes
+		io_fullize_planet = yes
+	}
+	}
+	else_if = {
+		limit = {
+			NOR ={
+				has_origin = origin_void_dwellers
+				has_origin = origin_shattered_ring
+				has_origin = origin_life_seeded
+			}
+		}
+		capital_scope = {
+		io_upgrade_planet_3 = yes
+		clear_blockers = yes
+		io_set_planet_dis = yes
+		io_fullize_planet = yes
+	}
+	}
+	#内部建设
+	if = { limit = { has_country_flag = is_advanced_start_AI NOR = { has_origin = origin_void_dwellers 
+	has_origin = origin_shattered_ring } } 
+	every_owned_planet = {
+		limit = { is_capital = no }
+		generate_start_buildings_and_districts = yes
+		if = { limit = { owner = { has_origin = origin_machine } }
+		io_machine_change = yes }
+		io_upgrade_planet_3 = yes
+		io_set_planet_dis = yes
+		clear_blockers = yes
+		io_fullize_planet = yes
+	}	
+	}
+	#扩张边界
+	while = {
+		count = expand
+		io_expand_border = yes
+	}
+	#殖民
+		every_planet_within_border = {
+		limit = {
+			is_colonizable = yes
+			is_colony = no
+			habitability = {
+				who = event_target:fir_pop
+				value > 0.45
+			}
+			NOT = { has_modifier = holy_planet }
+		}
+		set_owner = root
+		io_normal_1 = yes
+		io_normal_2 = yes
+		io_normal_3 = yes	
+		}
+		export_trigger_value_to_variable = {
+			trigger = controlled_systems
+			variable = io_star
+		}
+		divide_variable = {
+			which = io_star
+			value = 10
+		}
+		change_variable = {
+			which = io_star
+			value = 3
+		}
+		if = { limit = { has_civic = civic_trading_posts } 
+		change_variable = {
+			which = io_star
+			value = 4
+		}
+		}
+		if = {	NOR ={
+			has_origin = origin_void_dwellers
+			has_origin = origin_shattered_ring
+			has_origin = origin_life_seeded
+		}
+		every_owned_planet = { 
+			solar_system = {
+				starbase = { if = { limit = { NOR = { has_starbase_size = starbase_starfortress
+					owner = { check_variable = { which = io_star value < 1 }
+				 	} } }
+						set_starbase_size = starbase_starfortress
+						set_starbase_module = {
+							slot = 1
+							module = shipyard
+						}
+						set_starbase_module = {
+							slot = 2
+							module = shipyard
+						}
+						set_starbase_module = {
+							slot = 3
+							module = shipyard
+						}
+						set_starbase_module = {
+							slot = 4
+							module = anchorage
+						}
+						set_starbase_module = {
+							slot = 5
+							module = anchorage
+						}
+						set_starbase_module = {
+							slot = 6
+							module = anchorage
+						}
+						set_starbase_building = {
+							slot = 1
+							building = crew_quarters
+						}
+						set_starbase_building = {
+							slot = 2
+							building = naval_logistics_office
+						}
+						set_starbase_building = {
+							slot = 3
+							building = fleet_academy
+						}
+						owner = { subtract_variable = { which = io_star value = 1 } }
+					}
+				}
+			}
+		}
+	}
+
+	#建造站点
+		every_planet_within_border = {
+			limit = {
+				has_deposit_for = shipclass_mining_station
+				has_mining_station = no
+			}
+			create_mining_station = {
+				owner = ROOT
+			}
+		}
+		every_planet_within_border = {
+			limit = {
+				has_deposit_for = shipclass_research_station
+				has_research_station = no
+			}
+			create_research_station = {
+				owner = ROOT
+			}
+		}
+		if = {
+			limit = {
+				has_origin = origin_galactic_hegemon
+		}
+		country_event = { id = galactic_expand.4 }	
+		}
+		if = {
+			limit = {
+				OR = {
+				has_origin = origin_shattered_ring
+				has_origin = origin_void_dwellers
+				has_origin = origin_life_seeded
+				}
+			}
+			country_event = { id = galactic_expand.3 }
+		}
+
+	}
+}
+
+
+
+country_event = {
+	id = galactic_expand.2
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		every_playable_country = { 
+			limit = { is_in_federation_with = root is_federation_leader = no }
+			capital_scope = {
+				if = { limit = { root = { NOT = { has_country_flag = io_1_saved } } }
+				save_event_target_as = io_old_captial_1
+				set_planet_flag = io_old_captial
+				owner = { set_country_flag = io_1 }
+				root = { set_country_flag = io_1_saved }
+			}
+			else = {
+				save_event_target_as = io_old_captial_2
+				set_planet_flag = io_old_captial
+				owner = { set_country_flag = io_1 }
+			}
+			closest_system = {
+				min_steps = 7
+				max_steps = 11
+				limit = { 
+				any_system_planet = {
+				is_colony = no is_colonizable = yes
+				}
+				has_owner = no 	
+				NOT = { has_star_flag = hostile_system }
+				}
+				create_starbase = {
+					size = starbase_starport
+					owner = prevprev
+				}
+				random_system_planet = {
+					limit = {
+						is_colony = no is_colonizable = yes
+					}
+					random_list = {
+						20 = { set_planet_size = 18 }
+						20 = { set_planet_size = 19 }
+						20 = { set_planet_size = 20 }
+						20 = { set_planet_size = 21 }
+						20 = { set_planet_size = 22 }
+					}
+					change_pc = prevprevprev.species
+					set_owner = prevprevprev
+					generate_start_pops = yes
+					generate_start_buildings_and_districts = yes
+					set_capital = yes
+					owner_main_species = {
+						set_species_homeworld = prev
+					}
+				}
+			}
+		}
+		}
+		event_target:io_old_captial_1 = {
+			solar_system = {
+				starbase = {
+					set_owner = root
+				}
+			}
+			set_owner = root
+		}
+		event_target:io_old_captial_2 = {
+			solar_system = {
+				starbase = {
+					set_owner = root
+				}
+			}
+			set_owner = root
+		}
+		federation = {
+			add_federation_experience = 5000
+			set_federation_law = centralization_medium
+			set_federation_law = fleet_contribution_medium
+			set_federation_law = vote_weight_diplomatic
+			if = { limit = { NOT = { has_federation_type = hegemony_federation } }
+			set_federation_law = declare_war_majority_vote
+			set_federation_law = invite_members_majority_vote
+			}
+			set_federation_law = free_migration_yes
+		}
+}
+}
+
+country_event = {
+	id = galactic_expand.3
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		io_save_nation_pop = yes
+		if = { limit = { NOT = { has_origin = origin_life_seeded }  }
+		capital_scope = { io_upgrade_planet_3 = yes } }
+		if = { limit = { has_origin = origin_shattered_ring }
+		capital_scope = {
+			remove_all_districts = yes
+			clear_blockers = yes
+			change_pc = pc_ringworld_habitable
+			set_planet_size = 10
+			if = { limit = { owner = { is_gestalt = no } }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_city }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_commercial } 
+			}
+			if = { limit = { owner = { is_machine_empire = yes } }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_nexus }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_generator } 
+			}
+			if = { limit = { owner = { is_hive_empire = yes } }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_hive }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_generator } 
+			}
+			if = { limit = { owner = { country_uses_food = yes } }
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_farming }
+			}
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_science } 
+			add_district_and_planet_size_if_needed_effect = { district = district_rw_industrial } 
+			io_fullize_planet = yes
+			solar_system = {
+				every_megastructure = {
+					limit = { is_megastructure_type = ring_world_ruined }
+					upgrade_megastructure_to = ring_world_restored
+					finish_upgrade = yes
+				}
+			}
+		}
+		}
+	if = { limit = { has_origin = origin_void_dwellers }
+		every_owned_planet = {
+			limit = { is_planet_class = pc_habitat }
+			set_planet_entity = {
+				entity = "habitat_phase_03_entity"
+				graphical_culture = owner
+			}	
+			set_planet_flag = advanced_habitat_2
+			set_planet_size = 8
+			if = { limit = { has_building = building_hab_capital }
+			remove_building = building_hab_capital
+			add_building = building_hab_major_capital
+			}
+			if = { limit = { has_planet_flag = research_habitat }
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_science } 
+			if = {
+				limit = { owner = { is_gestalt = no } }
+				remove_building = building_research_lab_1
+				add_building = building_institute
+			}
+			if = {
+				limit = { owner = { is_gestalt = yes } }
+				remove_building = building_research_lab_1
+				add_building = building_supercomputer
+			}
+			}
+			if = { limit = { has_planet_flag = mining_habitat }
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_mining } 
+			add_building = building_mineral_purification_hub
+			}
+			if = { limit = { has_planet_flag = energy_habitat }
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_energy } 
+			add_building = building_energy_nexus
+			}
+			io_fullize_planet = yes
+		}
+	}
+	if = { limit = { has_origin = origin_life_seeded }
+	capital_scope = {
+		io_update_home_planet_gaia = yes
+		clear_blockers = yes
+		io_fullize_planet = yes
+	}
+}
+capital_scope = { 
+	solar_system = {
+		starbase = { if = { limit = { NOR = { has_starbase_size = starbase_starfortress
+			owner = { check_variable = { which = io_star value < 1 }
+			 } } }
+				set_starbase_size = starbase_starfortress
+				set_starbase_module = {
+					slot = 1
+					module = shipyard
+				}
+				set_starbase_module = {
+					slot = 2
+					module = shipyard
+				}
+				set_starbase_module = {
+					slot = 3
+					module = shipyard
+				}
+				set_starbase_module = {
+					slot = 4
+					module = anchorage
+				}
+				set_starbase_module = {
+					slot = 5
+					module = anchorage
+				}
+				set_starbase_module = {
+					slot = 6
+					module = anchorage
+				}
+				set_starbase_building = {
+					slot = 1
+					building = crew_quarters
+				}
+				set_starbase_building = {
+					slot = 2
+					building = naval_logistics_office
+				}
+				set_starbase_building = {
+					slot = 3
+					building = fleet_academy
+				}
+				owner = { subtract_variable = { which = io_star value = 1 } }
+			}
+		}
+	}
+}
+		country_event = {
+			id = galactic_expand.6
+		}
+	}
+}
+
+country_event = {
+
+	id = galactic_expand.4
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+			#皇帝的矿球
+			random_planet_within_border = {
+				limit = {
+					is_ringworld = no
+					is_asteroid = no
+					is_star = no
+					is_moon = no
+					is_colonizable = no
+				}
+					set_owner = root
+					if = { limit = { owner = { is_machine_empire = no } } 
+					change_pc = root.species }
+					if = { limit = { owner = { is_machine_empire = yes } } 
+					random_list = {
+						10 = { change_pc = pc_arid }
+						10 = { change_pc = pc_desert }
+						10 = { change_pc = pc_savannah } 
+					} }
+					set_planet_size = 24
+					clear_planet_modifiers = yes
+					generate_start_pops = yes
+					generate_start_buildings_and_districts = yes
+					io_upgrade_planet_3 = yes
+					reroll_deposits = yes
+					remove_all_districts = yes
+					clear_blockers = yes
+					add_modifier = { modifier = ultra_rich }
+					add_deposit = d_rich_mountain
+					add_deposit = d_dust_desert
+					while = {
+						count = 3
+						io_add_city = yes
+					}
+					remove_building = building_research_lab_3
+					remove_building = building_research_lab_3
+					add_building = building_mineral_purification_hub
+					while = {
+						count = 2
+						add_building = building_mote_harvesters
+					}
+					random_list = {
+						40 = { add_deposit = d_submerged_ore_veins }
+						30 = { add_deposit = d_ore_rich_caverns }
+						30 = { add_deposit = d_prosperous_mesa }
+					}
+					while = {
+						limit = { NOT = {  num_free_districts = { type = district_mining value = 0 } } }
+						add_district_and_planet_size_if_needed_effect = {
+								district = district_mining
+						}
+					}
+					io_fullize_planet = yes
+					every_owned_pop = {
+						limit = { is_unemployed = yes }
+						kill_pop = yes
+					}
+				}
+	#石头皇帝的矿球
+	if = { limit = { is_lithoid = yes }
+	random_planet_within_border = {
+		limit = {
+			is_ringworld = no
+			is_asteroid = no
+			is_star = no
+			is_moon = no
+			is_colonizable = no
+		}
+		change_pc = root.species
+			set_owner = root
+			set_planet_size = 20
+			clear_planet_modifiers = yes
+			generate_start_pops = yes
+			generate_start_buildings_and_districts = yes
+			io_upgrade_planet_3 = yes
+			reroll_deposits = yes
+			remove_all_districts = yes
+			clear_blockers = yes
+			add_modifier = { modifier = ultra_rich }
+			add_deposit = d_rich_mountain
+			add_deposit = d_fuming_bog
+			while = {
+				count = 3
+				io_add_city = yes
+			}
+			remove_building = building_research_lab_3
+			remove_building = building_research_lab_3
+			add_building = building_mineral_purification_hub
+			while = {
+				count = 2
+				add_building = building_gas_extractors
+			}
+			random_list = {
+				40 = { add_deposit = d_submerged_ore_veins }
+				30 = { add_deposit = d_ore_rich_caverns }
+				30 = { add_deposit = d_prosperous_mesa }
+			}
+			while = {
+				limit = { NOT = {  num_free_districts = { type = district_mining value = 0 } } }
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_mining
+				}
+			}
+			io_fullize_planet = yes
+			every_owned_pop = {
+				limit = { is_unemployed = yes }
+				kill_pop = yes
+			}
+		}
+	}
+	#机械皇帝的机械球
+	if = { limit = {  
+	is_machine_empire = yes NOT = { has_civic = civic_machine_servitor } }
+	random_planet_within_border = {
+		limit = {
+			is_ringworld = no
+			is_asteroid = no
+			is_star = no
+			is_moon = no
+			is_colonizable = no
+		}
+			change_pc = pc_machine
+			set_owner = root
+			set_planet_size = 20
+			clear_planet_modifiers = yes
+			generate_start_pops = yes
+			generate_start_buildings_and_districts = yes
+			io_upgrade_planet_3 = yes
+			remove_all_districts = yes
+			clear_blockers = yes
+			add_building = building_mineral_purification_hub
+			add_building = building_energy_nexus
+			while = {
+				count = 3
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_nexus
+				}
+			}
+			while = {
+				count = 3
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_generator_uncapped
+				}
+			}
+			while = {
+				count = 3
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_mining_uncapped
+				}
+			}
+			io_fullize_planet = yes
+			every_owned_pop = {
+				limit = { is_unemployed = yes }
+				kill_pop = yes
+			}
+		}
+	}
+		#御手办园
+		if = { limit = {  
+		is_machine_empire = yes has_civic = civic_machine_servitor }
+		random_planet_within_border = {
+			limit = {
+				is_ringworld = no
+				is_asteroid = no
+				is_star = no
+				is_moon = no
+				is_colonizable = no
+			}
+				change_pc = pc_city
+				set_owner = root
+				set_planet_size = 18
+				clear_planet_modifiers = yes
+				generate_start_buildings_and_districts = yes
+				io_upgrade_planet_3 = yes
+				remove_all_districts = yes
+				remove_building = building_organic_sanctuary
+				clear_blockers = yes
+				add_district_and_planet_size_if_needed_effect = {
+					district = district_arcology_housing
+				}
+				add_district_and_planet_size_if_needed_effect = {
+					district = district_arcology_housing
+				}
+				io_fullize_planet = yes
+				while = {
+					count = 3
+					add_district_and_planet_size_if_needed_effect = {
+							district = district_arcology_organic_housing
+					}
+				}	
+				every_playable_country = {
+					limit = {  is_galactic_community_member = yes
+					is_machine_empire = no
+					}
+				owner_species = {
+					save_event_target_as = collection
+					prevprev = {
+						create_pop = {
+							species = event_target:collection
+						}
+					}
+				}
+				}
+				every_owned_pop = {
+					limit = { is_unemployed = yes }
+					kill_pop = yes
+				}
+			}
+		}
+	#皇帝的电球
+	random_planet_within_border = {
+		limit = {
+			is_ringworld = no
+			is_asteroid = no
+			is_star = no
+			is_moon = no
+			is_colonizable = no
+		}
+
+			set_owner = root
+			set_planet_size = 22
+			if = { limit = { owner = { is_machine_empire = no } } 
+			change_pc = root.species }
+	if = { limit = { owner = { is_machine_empire = yes } } 
+			random_list = {
+				10 = { change_pc = pc_tundra }
+				10 = { change_pc = pc_alpine }
+				10 = { change_pc = pc_arctic }
+			} 
+		}
+			clear_planet_modifiers = yes
+			generate_start_pops = yes
+			generate_start_buildings_and_districts = yes
+			io_upgrade_planet_3 = yes
+			reroll_deposits = yes
+			remove_all_districts = yes
+			clear_blockers = yes
+			add_modifier = { modifier = hazardous_weather }
+			add_deposit = d_tempestous_mountain
+			add_deposit = d_crystal_forest
+			while = {
+				count = 3
+				io_add_city = yes
+			}
+			remove_building = building_research_lab_3
+			remove_building = building_research_lab_3
+			add_building = building_energy_nexus
+			while = {
+				count = 2
+				add_building = building_crystal_mines
+			}
+			random_list ={
+				40 = { add_deposit = d_underwater_vent }
+				20 = { add_deposit = d_frozen_gas_lake }
+				20 = { add_deposit = d_searing_desert }
+				10 = { add_deposit = d_hot_springs }
+				10 = { add_deposit = d_arid_highlands }
+			}
+			while = {
+				limit = { NOT = {  num_free_districts = { type = district_generator value = 0 } } }
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_generator
+				}
+			}
+			io_fullize_planet = yes
+			every_owned_pop = {
+				limit = { is_unemployed = yes }
+				kill_pop = yes
+			}
+		}
+		#皇帝的粮食球
+	if = { limit = {  
+	country_uses_food = yes 
+	is_machine_empire = no }
+	random_planet_within_border = {
+		limit = {
+			is_ringworld = no
+			is_asteroid = no
+			is_star = no
+			is_moon = no
+			is_colonizable = no
+		}
+		set_owner = root
+			set_planet_size = 21
+			if = {
+				limit = { owner = { is_machine_empire = no } }
+				change_pc = root.species
+			}
+			if = { limit = { owner = { is_machine_empire = yes } } 
+				random_list = {
+					10 = { change_pc = pc_continental }
+					10 = { change_pc = pc_ocean }
+					10 = { change_pc = pc_tropical }
+				} 
+			}
+			clear_planet_modifiers = yes
+			generate_start_pops = yes
+			generate_start_buildings_and_districts = yes
+			io_upgrade_planet_3 = yes
+			reroll_deposits = yes
+			remove_all_districts = yes
+			clear_blockers = yes
+			add_modifier = { modifier = lush_planet }
+			add_deposit = d_black_soil
+			add_deposit = d_fuming_bog
+			while = {
+				count = 3
+				io_add_city = yes
+			}
+			remove_building = building_research_lab_3
+			remove_building = building_research_lab_3
+			add_building = building_food_processing_center
+			while = {
+				count = 2
+				add_building = building_gas_extractors
+			}
+			random_list ={
+				40 = { add_deposit = d_teeming_reef }
+				30 = { add_deposit = d_fertile_lands }
+				30 = { add_deposit = d_lush_jungle }
+			}
+			while = {
+				limit = { NOT = { num_free_districts = { type = district_farming value = 0 } } 
+				owner = { is_anglers_empire = yes } } 
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_farming_uncapped
+				}
+			}
+			while = {
+				limit = { NOT = { num_free_districts = { type = district_farming value = 0 } } 
+				owner = { is_anglers_empire = no } } 
+				add_district_and_planet_size_if_needed_effect = {
+						district = district_farming
+				}
+			}
+			io_fullize_planet = yes
+			every_owned_pop = {
+				limit = { is_unemployed = yes }
+				kill_pop = yes
+			}
+		}
+	}
+
+	}
+}
+
+country_event = {
+	id = galactic_expand.5
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		every_owned_ship = {
+			limit = { is_ship_class = shipclass_military }
+			delete_ship = this
+		}
+		create_fleet_from_naval_cap = 0.2
+		create_fleet_from_naval_cap = 0.2
+		create_fleet_from_naval_cap = 0.2
+		if = { limit = { is_federation_leader = yes } 
+		create_fleet_from_naval_cap = { fraction = 0.4 ship_owner_type = federation }
+		} }
+		}
+
+country_event = {
+	id = galactic_expand.6
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		export_trigger_value_to_variable = {
+			trigger = controlled_systems
+			variable = io_star
+		}
+		divide_variable = {
+			which = io_star
+			value = 10
+		}
+		change_variable = {
+			which = io_star
+			value = 2
+		}
+		if = { limit = { has_civic = civic_trading_posts } 
+		change_variable = {
+			which = io_star
+			value = 4
+		}
+		}
+		floor_variable = io_star
+		while = {
+			count = io_star
+			random_owned_starbase = { if = { 
+				limit = { NOT = { has_starbase_size = starbase_starfortress } 
+				} }
+					set_starbase_size = starbase_starfortress
+					set_starbase_module = {
+						slot = 1
+						module = shipyard
+					}
+					set_starbase_module = {
+						slot = 2
+						module = shipyard
+					}
+					set_starbase_module = {
+						slot = 3
+						module = shipyard
+					}
+					set_starbase_module = {
+						slot = 4
+						module = anchorage
+					}
+					set_starbase_module = {
+						slot = 5
+						module = anchorage
+					}
+					set_starbase_module = {
+						slot = 6
+						module = anchorage
+					}
+					set_starbase_building = {
+						slot = 1
+						building = crew_quarters
+					}
+					set_starbase_building = {
+						slot = 2
+						building = naval_logistics_office
+					}
+					set_starbase_building = {
+						slot = 3
+						building = fleet_academy
+					}
+					if = { limit = { owner = { has_origin = origin_void_dwellers } }
+					solar_system = {
+						random_system_planet = {
+							limit = { 
+							is_ringworld = no
+							is_asteroid = no
+							is_star = no
+							is_colonizable = no
+							OR = {
+								has_deposit_for = shipclass_research_station
+								has_deposit_for = shipclass_mining_station
+							}
+							}
+							save_event_target_as = spawn_planet
+						}
+						spawn_megastructure = {
+							type = habitat_0
+							name = Habitat
+							owner = root
+							planet = event_target:spawn_planet
+							graphical_culture = owner
+							orbit_distance = 9.899
+							orbit_angle = 45
+						}
+					}
+					}
+					owner = { subtract_variable = { which = io_star value = 1 } }
+				}
+			}
+		country_event = {
+			id = galactic_expand.7
+		}
+	}
+}
+
+country_event = {
+	id = galactic_expand.7
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+	#存储物种
+	io_save_nation_pop = yes
+	#殖民
+		every_planet_within_border = {
+		limit = {
+			is_planet_class = pc_habitat
+			is_colony = no
+		}
+		set_owner = root
+		if = {
+			limit = {
+				has_planet_flag = research_habitat
+			}
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_science } 
+			if = { limit = { owner = { country_uses_food = yes } } 
+			add_building = building_hydroponics_farm }
+		}
+		else_if = {
+			limit = {
+				has_planet_flag = mining_habitat
+			}
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_mining } 
+			if = { limit = { owner = { country_uses_food = yes } } 
+			add_building = building_hydroponics_farm }
+			if = { limit = { owner = { is_lithoid_empire = yes } } 
+			add_building = building_mineral_purification_hub }
+		}
+		else_if = {
+			limit = {
+				OR = {
+				has_planet_flag = energy_habitat
+				owner = { is_gestalt = yes }
+				}
+			}
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_energy } 
+			if = { limit = { owner = { country_uses_food = yes } } 
+			add_building = building_hydroponics_farm }
+			if = { limit = { owner = { is_machine_empire = yes } } 
+			add_building = building_energy_brid }
+		}
+		else = {
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_housing } 
+			add_district_and_planet_size_if_needed_effect = { district = district_hab_commercial } 
+			if = { limit = { owner = { country_uses_food = yes } } 
+			add_building = building_hydroponics_farm }
+		}
+		io_fullize_planet = yes
+	}
+	every_planet_within_border = {
+		limit = {
+			is_planet_class = pc_ringworld_habitable
+			is_colony = no
+		}
+		set_owner = root
+		create_pop = {
+			species = fir_pop
+		}
+		create_pop = {
+			species = fir_pop
+		}
+	}
+}
+}
