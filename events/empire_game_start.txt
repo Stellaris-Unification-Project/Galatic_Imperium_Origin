@@ -249,13 +249,11 @@ event = {
 		}
 		every_playable_country = {
 				limit = {
-					NOT = {
-					OR = {
+					NOR = {
 					has_civic = civic_fanatic_purifiers
 					has_civic = civic_hive_devouring_swarm
 					has_civic = civic_machine_terminator
-					}
-					}
+}
 				}
 				add_to_galactic_community_no_message = yes
 		}
